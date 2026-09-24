@@ -1,0 +1,274 @@
+.palette {
+	display: flex;
+}
+
+.palette-index {
+	width: 16px;
+	height: 16px;
+	margin: 1px;
+	box-shadow: 0px 0px 1px 1px white inset;
+	background: attr(data-background type(<color>), red);
+}
+
+html {
+	overscroll-behavior-x: none;
+}
+
+body {
+	background: ghostwhite;
+	margin: 0;
+}
+
+#app {
+	height: 100vh;
+}
+
+.sprite-sheet-creator {
+	height: 100%;
+	display: grid;
+	/* grid-template-areas: "header header" "current palette" "combiner palette" "sprites sprites";
+    grid-template-columns: auto calc(20px * 16 + 40px);
+    grid-template-rows: 64px calc(256px + 40px) minmax(0, 1fr) calc(64px + 40px); */
+
+	grid:
+		"header   header	header" 64px
+		"sprites  sprites	sprites" calc(64px + 40px)
+		"current  color		palette" auto
+		"combiner map	  	map" minmax(0, 1fr) / auto auto calc(20px * 16 + 40px);
+}
+
+#header {
+	grid-area: header;
+
+	background: aquamarine;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	padding-inline: 20px;
+}
+
+#files-dialog[open] {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.files {
+	display: flex;
+	gap: 10px;
+}
+
+.file>pre {
+	width: 300px;
+	height: 300px;
+}
+
+.current {
+	grid-area: current;
+	padding: 10px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	gap: 20px;
+}
+
+.palette-container {
+	grid-area: palette;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	padding: 10px;
+}
+
+.color-container {
+	grid-area: color;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.active-color {
+	display: flex;
+	justify-content: space-evenly;
+	gap: 20px;
+	align-items: center;
+}
+
+.color-input {
+	display: flex;
+	flex-direction: column;
+}
+
+.color-input>div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.palette {
+	display: flex;
+	flex-direction: column;
+}
+
+.palette>div {
+	display: flex;
+}
+
+.sprites {
+	grid-area: sprites;
+
+	display: flex;
+	padding: 10px;
+	overflow-x: auto;
+	gap: 10px
+}
+
+.combiner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+
+	padding: 20px;
+}
+
+.combiner-container {
+	grid-area: combiner;
+}
+
+.combiner-matrix {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	gap: 10px;
+}
+
+.combiner-rows {
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+	justify-content: center;
+
+	padding: 10px;
+}
+
+.combiner-rows>button {
+	margin-top: 10px;
+}
+
+.combiner-cols {
+	display: inline-flex;
+}
+
+#load-from-files-dialog[open] {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.load-from-files-container {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	gap: 20px;
+}
+
+.load-from-files {
+	display: flex;
+	gap: 10px;
+}
+
+.load-from-file {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.load-from-file > div {
+	display: flex;
+	justify-content: space-evenly;
+}
+.load-from-file > textarea {
+	width: 100%;
+	height: 500px;
+}
+
+pre,
+textarea {
+	font-family: monospace;
+	background: lightcyan;
+	border: 1px solid cyan;
+	overflow: auto;
+	font-size: 7px;
+}
+
+.combiner-actions {
+	display: flex;
+	gap: 20px;
+}
+
+.combiner-popover[open] {
+	display: flex;
+	flex-direction: column;
+}
+
+.combiner-popover>div {
+	display: flex;
+	justify-content: space-between;
+}
+
+#duplicate-dialog[open] {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.map-container {
+	grid-area: map;
+}
+
+.map {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 20px;
+}
+
+.map-actions {
+	display: flex;
+	align-items: center;
+	gap: 50px;
+}
+
+.map-matrix {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.map-row {
+	display: inline-flex;
+}
+
+.map-tile {
+	display: inline-flex;
+}
+
+canvas {
+	image-rendering: pixelated;
+    border: 1px solid red;
+}
+
+.load-summary {
+	display: flex;
+	justify-content: space-evenly;
+	padding: 10px;
+	border: 1px solid red;
+}
