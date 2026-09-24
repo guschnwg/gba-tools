@@ -2,23 +2,23 @@ import { useMemo, useRef, useState } from "preact/hooks";
 import { chunks } from "./utils";
 import { Tile } from "./Map";
 
-const DEFAULT_HEADER = `#ifndef SHEET_SPRITES_H
+const DEFAULT_HEADER = `#ifndef SHEET_DEFAULT_H
 #define SHEET_SPRITES_H
 
-#define spritesDefinedLen 16
-#define spritesTilesLen spritesDefinedLen * 8 * 4
-extern const unsigned int spritesTiles[spritesDefinedLen * 8];
+#define defaultSpritesDefinedLen 16
+#define defaultTilesLen defaultSpritesDefinedLen * 8 * 4
+extern const unsigned int defaultTiles[defaultSpritesDefinedLen * 8];
 
-#define spritesPalLen 512
-extern const unsigned short spritesPal[256];
+#define defaultPalLen 512
+extern const unsigned short defaultPal[256];
 
 #endif`;
 
 const DEFAULT_ASM = `	.section .rodata
     .align 2
-    .global spritesTiles		@ 256 unsigned chars
-    .hidden spritesTiles
-spritesTiles:
+    .global defaultTiles		@ 256 unsigned chars
+    .hidden defaultTiles
+defaultTiles:
     .word 0xCCCCCCCC,0xCCCCCCCC,0xCCCCCCCC,0xCCCCCCCC,0xCCCCCCCC,0xCCCCCCCC,0xCCCCCCCC,0xCCCCCCCC
     .word 0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF
     .word 0x99999999,0x99999999,0x99999999,0x99999999,0x99999999,0x99999999,0x99999999,0x99999999
@@ -38,9 +38,9 @@ spritesTiles:
 
     .section .rodata
     .align 2
-    .global spritesPal		@ 512 unsigned chars
-    .hidden spritesPal
-spritesPal:
+    .global defaultPal		@ 512 unsigned chars
+    .hidden defaultPal
+defaultPal:
     .hword 0x17BF,0x6338,0x4976,0x2CF1,0x41F0,0x4497,0x3E04,0x2A64
     .hword 0x7BC0,0x1BDF,0x2718,0x7730,0x6228,0x59F8,0x02BC,0x2EF1
     .hword 0x0D49,0x54D7,0x1611,0x0C25,0x7AA4,0x7344,0x565D,0x46B1
