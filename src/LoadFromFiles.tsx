@@ -103,15 +103,23 @@ function assemblyToMap(assembly: string): Tile[] {
     const mapData = sections.find(s => s.includes('Map:'));
     if (!mapData) return [];
 
+    const tileIndexMask = 0b0000001111111111;
+    const flipHMask     = 0b0000010000000000;
+    const flipVMask     = 0b0000100000000000;
+    // TODO: Currently unused - i learned that a tilemap can use multiple palettes at once!
+    const palletteMask  = 0b1111000000000000; 
+
     const rows = mapData.split('Map:')[1].trim().split('\n').map(r => r.trim()).filter(Boolean);
     const tiles = rows.map(r => r.split(' ')[1].split(',')).flat()
     return tiles.map(tile => {
         const parsed = parseInt(tile, 16);
         return {
-            spriteIdx: parsed & 0b001111111111,
+            spriteIdx: parsed & tileIndexMask,
+            // TODO: Currently unused - i learned that a tilemap can use multiple palettes at once!
+            // paletteIdx: parsed & palletteMask,
             flip: {
-                v: Boolean(parsed & 0b010000000000),
-                h: Boolean(parsed & 0b100000000000)
+                v: Boolean(parsed & flipVMask),
+                h: Boolean(parsed & flipHMask)
             }
         };
     });

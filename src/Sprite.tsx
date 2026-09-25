@@ -1,5 +1,6 @@
 import { TargetedMouseEvent } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
+import { copy } from "./utils";
 
 export function Sprite({
     showGrid = false,
@@ -32,8 +33,8 @@ export function Sprite({
         const context = canvasRef.current.getContext('2d');
         if (!context) return;
 
-        (flip?.v ? sprite.slice().reverse() : sprite).map((row, rowIdx) => {
-            (flip?.h ? row.slice().reverse() : row).map((pixel, colIdx) => {
+        (flip?.v ? copy(sprite).reverse() : sprite).map((row, rowIdx) => {
+            (flip?.h ? copy(row).reverse() : row).map((pixel, colIdx) => {
                 context.fillStyle = palette[pixel];
                 context.fillRect(colIdx * size, rowIdx * size, size, size);
             })
