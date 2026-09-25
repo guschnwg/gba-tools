@@ -51,6 +51,7 @@ export function Combiner({
                                         key={spriteIdx}
                                         size={size}
                                         sprite={sprites[spriteIdx]}
+                                        flip={flip}
                                         palette={palette}
                                         onClick={event => {
                                             const popover = event.currentTarget.nextSibling as HTMLDialogElement;

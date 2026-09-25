@@ -5,6 +5,7 @@ export function Sprite({
     showGrid = false,
     size = 8,
     sprite,
+    flip,
     palette,
     onDraw = () => { },
     onClick = () => { },
@@ -12,6 +13,7 @@ export function Sprite({
     showGrid?: boolean,
     size?: number,
     sprite: Array<Array<number>>,
+    flip: { h: boolean, v: boolean },
     palette: Array<string>,
     onDraw?: (x: number, y: number) => void
     onClick?: (event: TargetedMouseEvent<HTMLCanvasElement>) => void
@@ -30,8 +32,8 @@ export function Sprite({
         const context = canvasRef.current.getContext('2d');
         if (!context) return;
 
-        sprite.map((row, rowIdx) => {
-            row.map((pixel, colIdx) => {
+        (flip?.v ? sprite.slice().reverse() : sprite).map((row, rowIdx) => {
+            (flip?.h ? row.slice().reverse() : row).map((pixel, colIdx) => {
                 context.fillStyle = palette[pixel];
                 context.fillRect(colIdx * size, rowIdx * size, size, size);
             })
@@ -51,7 +53,7 @@ export function Sprite({
             }
             context.stroke();
         }
-    }, [canvasRef, sprite, palette, size, showGrid]);
+    }, [canvasRef, sprite, flip, palette, size, showGrid]);
 
     useEffect(() => {
         if (!mouseDown) return;
