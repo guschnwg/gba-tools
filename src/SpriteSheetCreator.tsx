@@ -123,7 +123,9 @@ export function SpriteSheetCreator() {
                     onDraw={(x: number, y: number) => {
                         setSprites(prev => {
                             const newSprites = copy(prev);
-                            newSprites[activeSpriteIdx][y][x] = activeColorInPaletteIdx;
+                            if (x < tileSize && y < tileSize) {
+                                newSprites[activeSpriteIdx][y][x] = activeColorInPaletteIdx;
+                            }
                             return newSprites;
                         });
                     }}

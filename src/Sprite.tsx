@@ -13,7 +13,7 @@ export function Sprite({
     showGrid?: boolean,
     size?: number,
     sprite: Array<Array<number>>,
-    flip: { h: boolean, v: boolean },
+    flip?: { h: boolean, v: boolean },
     palette: Array<string>,
     onDraw?: (x: number, y: number) => void
     onClick?: (event: TargetedMouseEvent<HTMLCanvasElement>) => void
