@@ -287,6 +287,10 @@ canvas {
 	padding: 20px;
 }
 
+.bitmap-canvases {
+	position: relative;
+}
+
 .bitmap-content canvas {
 	margin: 20px;
 }

@@ -6,7 +6,9 @@ function headerFile(name: string, palette: { r: number, g: number, b: number }[]
     return `#ifndef BITMAP_${name.toUpperCase()}_H
 #define BITMAP_${name.toUpperCase()}_H
 
-#define ${name}BitmapDefinedLen 38400
+#define ${name}Width 240
+#define ${name}Height 160
+#define ${name}BitmapDefinedLen ${name}Width * ${name}Height
 extern const unsigned int ${name}Bitmap[${name}BitmapDefinedLen];
 
 #define ${name}PalLen 512
