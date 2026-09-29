@@ -7,6 +7,7 @@ import { Palette } from "./Palette";
 import { Combiner } from "./Combiner";
 import { DuplicateSprite } from "./DuplicateSprite";
 import { Map, Tile } from "./Map";
+import { ActiveColor } from "./ActiveColor";
 
 export function SpriteSheetCreator() {
     const [name, setName] = useState('sprites');
@@ -162,47 +163,11 @@ export function SpriteSheetCreator() {
             <div class="color-container">
                 <p>Current selected color</p>
 
-                <div class="active-color">
-                    <div class="color-info">
-                        <div
-                            class="palette-index"
-                            data-background={activeColorHex}
-                            style={{
-                                width: 64,
-                                height: 64,
-                            }}
-                        />
-                    </div>
-                    <div class="color-input">
-                        <div>
-                            R ({activeColorRgb.r})
-                            <input
-                                type='range'
-                                value={activeColorRgb.r}
-                                min={0} max={31}
-                                onInput={event => onColorChange('r', parseInt(event.currentTarget.value))}
-                            />
-                        </div>
-                        <div>
-                            G ({activeColorRgb.g})
-                            <input
-                                type='range'
-                                value={activeColorRgb.g}
-                                min={0} max={31}
-                                onInput={event => onColorChange('g', parseInt(event.currentTarget.value))}
-                            />
-                        </div>
-                        <div>
-                            B ({activeColorRgb.b})
-                            <input
-                                type='range'
-                                value={activeColorRgb.b}
-                                min={0} max={31}
-                                onInput={event => onColorChange('b', parseInt(event.currentTarget.value))}
-                            />
-                        </div>
-                    </div>
-                </div>
+                <ActiveColor
+                    activeColorHex={activeColorHex}
+                    activeColorRgb={activeColorRgb}
+                    onColorChange={onColorChange}
+                />
             </div>
 
             <div class="map-container">

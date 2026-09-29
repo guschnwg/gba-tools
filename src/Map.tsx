@@ -82,6 +82,13 @@ export function Map({
                         onMouseDown={() => setMouseDown(true)}
                         onMouseUp={() => setMouseDown(false)}
                         onMouseLeave={() => setMouseDown(false)}
+                        onMouseEnter={e => {
+                            if (e.buttons === 1) {
+                                setTileX(null);
+                                setTileY(null);
+                                setMouseDown(true);
+                            }
+                        }}
                         onMouseMove={event => {
                             setTileX(Math.floor(event.offsetX / (8 * size)));
                             setTileY(Math.floor(event.offsetY / (8 * size)));

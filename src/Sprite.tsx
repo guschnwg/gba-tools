@@ -71,6 +71,13 @@ export function Sprite({
             onMouseDown={() => setMouseDown(true)}
             onMouseUp={() => setMouseDown(false)}
             onMouseLeave={() => setMouseDown(false)}
+            onMouseEnter={e => {
+                if (e.buttons === 1) {
+                    setPixelX(null);
+                    setPixelY(null);
+                    setMouseDown(true);
+                }
+            }}
             onMouseMove={event => {
                 setPixelX(Math.floor(event.offsetX / size));
                 setPixelY(Math.floor(event.offsetY / size));

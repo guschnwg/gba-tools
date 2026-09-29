@@ -33,27 +33,31 @@ function spritesToAssembly(sprites: number[][][]): string {
     }).join('\n')
 }
 
-function paletteToAssembly(palette: { r: number, g: number, b: number }[]): string {
+export function paletteToAssembly(palette: { r: number, g: number, b: number }[]): string {
     return chunks(palette, 8).map(colors => {
         const formatted = colors.map(item => (item.r & 0b11111) | ((item.g & 0b11111) << 5) | ((item.b & 0b11111) << 10));
         return `    .hword ` + formatted.map(color => '0x' + color.toString(16).toUpperCase().padStart(4, '0')).join(',')
     }).join('\n');
 }
 
-function mapToAssembly(name: string, map: Tile[][]): string {
-    if (!map.length) return '';
-
+function mapToAssembly(map: Tile[][]): string {
     const rows = chunks(map.flat(), 8).map(tile => {
         const formatted = tile.map(item => (item.spriteIdx & 0b1111111111) | (Number(item.flip.h) << 10) | (Number(item.flip.v) << 11));
         return `    .hword ` + formatted.map(color => '0x' + color.toString(16).toUpperCase().padStart(4, '0')).join(',')
     });
+
+    return rows.join('\n');
+}
+
+function mapSection(name: string, map: Tile[][]): string {
+    if (!map.length) return '';
 
     return `    .section .rodata
     .align	2
     .global ${name}Map
     .hidden ${name}Map
 ${name}Map:
-${rows.join('\n')}`
+${mapToAssembly(map)}`
 }
 
 function assemblyFile(name: string, sprites: number[][][], palette: { r: number, g: number, b: number }[], map: Tile[][]) {
@@ -64,7 +68,7 @@ function assemblyFile(name: string, sprites: number[][][], palette: { r: number,
 ${name}Tiles:
 ${spritesToAssembly(sprites)}
 
-${mapToAssembly(name, map)}
+${mapSection(name, map)}
 
     .section .rodata
     .align 2
@@ -162,7 +166,7 @@ export function Files({
 
                 <div class="files">
                     <File
-                        name={name + ".g"}
+                        name={name + ".h"}
                         content={headerFile(name, sprites, map)}
                     />
                     <File
