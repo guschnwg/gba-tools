@@ -45,6 +45,7 @@ body {
 	align-items: center;
 	gap: 20px;
 	padding-inline: 20px;
+	height: 64px;
 }
 
 #files-dialog[open] {
@@ -271,4 +272,21 @@ canvas {
 	justify-content: space-evenly;
 	padding: 10px;
 	border: 1px solid red;
+}
+
+.bitmap-content {
+	display: flex;
+	gap: 20px;
+    align-items: center;
+}
+
+.bitmap-tools {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px;
+}
+
+.bitmap-content canvas {
+	margin: 20px;
 }

@@ -1,4 +1,3 @@
-import { useState } from "preact/hooks";
 import { chunks } from "./utils";
 import { Tile } from "./Map";
 
@@ -139,7 +138,7 @@ export function File({ name, content }: { name: string, content: string }) {
     )
 }
 
-export function Files({
+export function SpriteSheetFiles({
     name,
     sprites,
     palette,

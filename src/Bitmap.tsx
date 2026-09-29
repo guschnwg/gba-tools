@@ -2,17 +2,18 @@ import { useEffect, useRef, useState } from "preact/hooks";
 
 export function Bitmap({
     bitmap,
+    size,
     palette,
     activeColor,
     onChange
 }: {
     bitmap: number[][]
+    size: number
     palette: string[]
     activeColor: number
     onChange: (x: number, y: number) => void
 }) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const size = 4;
 
     const [mouseDown, setMouseDown] = useState(false);
     const [pixelX, setPixelX] = useState<number | null>(null);
@@ -32,7 +33,7 @@ export function Bitmap({
                 canvasCtx.fillRect(colIdx * size, rowIdx * size, size, size);
             });
         });
-    }, [bitmap, palette, activeColor]);
+    }, [bitmap, palette, activeColor, size]);
 
     useEffect(() => {
         if (!mouseDown) return;

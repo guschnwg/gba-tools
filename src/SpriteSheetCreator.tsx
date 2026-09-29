@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
 import { Sprite } from "./Sprite";
 import { emptySprites, emptyPalette, rgbToHex, chunks, hexToRgb, copy } from "./utils";
-import { Files, saveToLocalStorage } from "./Files";
-import { LoadFromFiles } from "./LoadFromFiles";
+import { SpriteSheetFiles, saveToLocalStorage } from "./SpriteSheetFiles";
+import { SpriteSheetLoadFromFiles } from "./SpriteSheetLoadFromFiles";
 import { Palette } from "./Palette";
 import { Combiner } from "./Combiner";
 import { DuplicateSprite } from "./DuplicateSprite";
@@ -64,7 +64,7 @@ export function SpriteSheetCreator() {
             <div>
                 <p>Start with randomly generated data, load from files or load from browser cache</p>
 
-                <LoadFromFiles
+                <SpriteSheetLoadFromFiles
                     onLoad={(sprites, palette, map) => {
                         setSprites(sprites);
                         setPalette(palette);
@@ -84,7 +84,7 @@ export function SpriteSheetCreator() {
                     <input type='text' value={name} onChange={event => setName(event.currentTarget.value)} />
                 </div>
 
-                <Files
+                <SpriteSheetFiles
                     name={name}
                     sprites={sprites}
                     palette={palette}
